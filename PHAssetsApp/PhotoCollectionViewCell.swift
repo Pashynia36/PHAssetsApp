@@ -14,7 +14,6 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     
     func prepareCell(asset: PHAsset) {
-        print(asset.localIdentifier)
         
         PHImageManager.default().requestImage(
             for: asset,

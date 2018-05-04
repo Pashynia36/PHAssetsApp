@@ -23,25 +23,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if let i = assets?.count {
-            return i
-        } else {
-            return 0
-        }
+        return assets?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as! PhotoCollectionViewCell
-        cell.prepareCell(asset: assets![indexPath.row])
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCell", for: indexPath) as? PhotoCollectionViewCell
+        cell?.prepareCell(asset: assets![indexPath.row])
+        return cell ?? UICollectionViewCell()
     }
     
     func fetchMyAssets() {
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
-        
         assets = PHAsset.fetchAssets(with: options)
     }
 }
